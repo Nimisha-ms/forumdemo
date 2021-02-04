@@ -21,4 +21,6 @@ class ReplyTest extends TestCase
 
     	$this->assertInstanceOf(User::class,$reply->owner);
     }
+
+    
 }

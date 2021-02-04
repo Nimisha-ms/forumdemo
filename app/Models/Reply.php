@@ -11,6 +11,8 @@ class Reply extends Model
 
     protected $table = 'replies';
 
+    protected $guarded = [];
+
     /*public function thread()
     {
         return $this->belongsTo(Thread::class);
