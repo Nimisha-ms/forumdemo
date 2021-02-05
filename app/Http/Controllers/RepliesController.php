@@ -12,10 +12,10 @@ class RepliesController extends Controller
 		$this->middleware('auth');
 	}
 
-    public function store(Thread $thread){
-    	
+    public function store(Thread $thread, Request $request){
+        
     	$thread->addReply([
-    		'body' => request('body'),
+    		'body' => $request->get('body'),
     		'user_id' => auth()->id()
     	]);
 

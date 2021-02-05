@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +28,9 @@ class ThreadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('threads.create');
     }
 
     /**
@@ -35,9 +39,16 @@ class ThreadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Thread $thread)
     {
-        //
+        //dd($request->all());
+        $thred = Thread::create([
+            'user_id' => auth()->id(),
+            'channel_id' => $request->get('channel_id'),    
+            'title' => $request->get('title'),
+            'body' => $request->get('body')
+        ]);
+        return redirect($thread->path());
     }
 
     /**
@@ -60,7 +71,7 @@ class ThreadsController extends Controller
      */
     public function edit(Thread $thread)
     {
-        //
+        return view('threads.edit');
     }
 
     /**
