@@ -34,6 +34,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li><a class="navbar-brand" href="/threads">All Threads</a></li>
+
+                         <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Channels <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                               <li><a href="#">Action</a></li>
+                               <li class="divider"></li>
+                               <li><a href="#">Separated link</a></li>
+                               <li class="divider"></li>
+                               <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

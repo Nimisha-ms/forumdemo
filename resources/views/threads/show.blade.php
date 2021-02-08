@@ -31,7 +31,7 @@
         @if(auth()->check())
        <div class="row">
             <div class="col-md-8 col-md-offset-2">                     
-              <form method="post" action="{{ $thread->path().'/replies' }}">
+              <form method="post" action="{{ '/threads/'.$thread->channel->id.'/'.$thread->id.'/replies' }}">
                 @csrf 
                     <div class="form-group">
                     <label for="body">Reply:</label>

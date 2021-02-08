@@ -13,11 +13,14 @@
                 <div class="form-group">
                     <label for="title">Title:</label>
                     <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" placeholder="Enter Title">   
+                     @if($errors->has('title'))
+                     <span class="text-danger">{{ $errors->first('title') }}</span>
+                     @endif
                 </div>
 
                 <div class="form-group">
                     <label for="body">Body:</label>
-                    <textarea class="form-control" name="body" id="body" placeholder="Required body" rows=5 required></textarea>
+                    <textarea class="form-control" name="body" id="body" placeholder="Required body" rows=5></textarea>
                 </div>
 
                  <button class="btn btn-primary" type="submit">Publish</button>
