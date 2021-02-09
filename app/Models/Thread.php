@@ -11,6 +11,8 @@ class Thread extends Model
 
     protected $guarded = [];
 
+    protected $table = "threads";
+
     public function path(){
     	return '/threads/'. $this->id;
     }

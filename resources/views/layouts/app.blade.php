@@ -18,6 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        body { padding-bottom: 100px; }
+        .level { display:flex; align-items: center;}
+        .flex { flex:1; }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -33,18 +38,38 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a class="navbar-brand" href="/threads">All Threads</a></li>
+                        
 
-                         <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Channels <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                               <li><a href="#">Action</a></li>
-                               <li class="divider"></li>
-                               <li><a href="#">Separated link</a></li>
-                               <li class="divider"></li>
-                               <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle navbar-brand" data-toggle="dropdown">Browse</a>
+                            <div class="dropdown-menu">                                                              
+                               <a class="dropdown-item" href="/threads">All Threads</a>
+
+                               @if(auth()->check())
+                               <a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
+                               @endif
+                              
+                                <!-- <div class="dropdown-divider"></div>
+                                <a href="#"class="dropdown-item">Trash</a> -->
+                            </div>
+                        </li>                       
+
+                        <li><a href="/threads/create" class="navbar-brand" href="/threads">New Thread</a></li>   
+
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Channels</a>
+                            <div class="dropdown-menu">
+                                
+                              @foreach($channels as $channel)                                
+                               <a class="dropdown-item" href="/threads/{{ $channel->slug }}">{{ $channel->name }}</a>
+                               @endforeach
+                                <!-- <div class="dropdown-divider"></div>
+                                <a href="#"class="dropdown-item">Trash</a> -->
+                            </div>
+                        </li>  
+
+                           
                     </ul>
 
                     <!-- Right Side Of Navbar -->

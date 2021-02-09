@@ -23,8 +23,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/threads',[ThreadsController::class,'index']);
 Route::get('threads/create',[ThreadsController::class,'create']);
+
+Route::get('/threads',[ThreadsController::class,'index']);
+Route::get('threads/{channel}',[ThreadsController::class,'index']);
+
+
 //Route::get('/threads/{thread}',[ThreadsController::class,'show']);
 Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::post('threads',[ThreadsController::class,'store']);

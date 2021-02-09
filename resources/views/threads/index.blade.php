@@ -10,9 +10,14 @@
                 <div class="card-body">
                    @foreach($threads as $thread)
                     <article>
-                        <h4>
+                        <div class="level">
+                        <h4 class="flex">
                             <a href="{{ '/threads/'.$thread->channel->slug.'/'.$thread->id }}">{{ $thread->title }}</a>
                         </h4>
+
+                        <a href="{{ $thread->path() }}">{{ $thread->replies_count }} Comments</a>
+                        </div>
+
                         <div class="body">{{ $thread->body }}</div>
                     </article>
                     <hr>
