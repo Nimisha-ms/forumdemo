@@ -1,5 +1,21 @@
- <div class="card-header">
-                <a href="#">{{ $reply->owner->name }}</a> said  {{ $reply->created_at->diffforHumans() }}...</div>
-                <div class="card-body">
+ <div class="panel panel-default">
+ 	<div class="level">
+ 		<a href="#" class="flex">
+ 			{{ $reply->owner->name }}
+ 		</a> said  {{ $reply->created_at->diffforHumans() }}...
+
+ 		<div>
+	 		<form action="">
+	 			<button type="submit" class="btn btn-primary btn-sm pull-right">
+	 				Favorite
+	 			</button>
+	 		</form>		
+ 		</div>
+
+ 	</div>
+
+                
+                <div class="panel-body">
                   {{ $reply->body }}
                 </div>
+</div>                

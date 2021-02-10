@@ -22,6 +22,61 @@
         body { padding-bottom: 100px; }
         .level { display:flex; align-items: center;}
         .flex { flex:1; }
+
+        .panel {
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-heading {
+  padding: 10px 15px;
+  margin: -15px -15px 15px;
+  font-size: 17.5px;
+  font-weight: 500;      
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dddddd;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.panel-footer {
+  padding: 10px 15px;
+  margin: 15px -15px -15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #dddddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+} 
+
+.panel-primary {
+  border-color: #428bca;
+}
+
+.panel-primary .panel-heading {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.panel.noborder {
+    border: none;
+    box-shadow: none;
+}
+.panel.noborder > .panel-heading {
+    border: 1px solid #dddddd;
+    border-radius: 0;
+}
+
+/* This kinda of works but now 
+.panel, .panel-group .panel-heading+.panel-collapse>.panel-body{
+    border: none;
+}
+*/
     </style>
 </head>
 <body>
@@ -45,6 +100,8 @@
                             <a href="#" class="nav-link dropdown-toggle navbar-brand" data-toggle="dropdown">Browse</a>
                             <div class="dropdown-menu">                                                              
                                <a class="dropdown-item" href="/threads">All Threads</a>
+
+                             <a class="dropdown-item" href="/threads?popular=1">Popular Threads</a>
 
                                @if(auth()->check())
                                <a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a>

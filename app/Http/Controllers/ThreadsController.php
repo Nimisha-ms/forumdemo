@@ -7,6 +7,7 @@ use App\Models\Reply;
 use App\Models\Channel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Filters\ThreadFilters;
 
 class ThreadsController extends Controller
 {
@@ -19,26 +20,38 @@ class ThreadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Channel $channel, Request $request)
+    //public function index(Channel $channel, Request $request)
+    public function index(Channel $channel, ThreadFilters  $filters)
     {        
-        if($channel->exists)
+        $threads = $this->getThreads($channel, $filters);
+        //$threads = $threads->withCount('replies')->get();
+       /* if($channel->exists)
         {
             $threads = $channel->threads()->latest();
         }else{
             $threads = Thread::latest();               
         }
 
+        //Get thread by username:
         if($username = $request->input('by'))
         {
-            $username = 'AlanWill';            
+            //$username = 'AlanWill';            
             $user = User::where('name', $username)
                     ->first();
 
             $threads = Thread::where('user_id', $user->id);
         }
 
-        $threads = $threads->withCount('replies')->get();
+        //Check popular
+        if($popular = $request->input('popular'))
+        {
 
+        }
+
+        $threads = $threads->withCount('replies')->get();
+*/
+
+        //return Thread::filter($filter)->get();
         return view('threads.index',compact('threads'));
     }
 
@@ -127,5 +140,17 @@ class ThreadsController extends Controller
     public function destroy(Thread $thread)
     {
         //
+    }
+
+    public function getThreads(Channel $channel, ThreadFilters  $filters){
+
+        $threads = Thread::latest()->filter($filters);
+
+        if($channel->exists)
+        {
+            $threads = $channel->threads()->latest();
+        }
+
+        return $threads->get();
     }
 }
