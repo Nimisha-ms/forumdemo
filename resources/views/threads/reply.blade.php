@@ -1,15 +1,28 @@
  <div class="panel panel-default">
  	<div class="level">
- 		<a href="#" class="flex">
+ 		<h5 class="flex">
+ 		<a href="#" class="">
  			{{ $reply->owner->name }}
- 		</a> said  {{ $reply->created_at->diffforHumans() }}...
-
+ 		</a> said  {{ $reply->created_at->diffforHumans() }}
+ 		 </h5>
  		<div>
-	 		<form action="">
-	 			<button type="submit" class="btn btn-primary btn-sm pull-right">
-	 				Favorite
+ 			<!--@if(session('message'))
+				{{ session('message') }}
+			@endif-->
+ 		</div>
+ 		<div>
+ 			  @if (Auth::check())
+	 		<form method="post" action="{{ route('favreply', $reply->id) }}">
+	 			@csrf
+	 			<button type="submit" class="btn btn-secondary flex"
+	 			{{ $reply->isFavorited() ? 'disabled' : '' }}
+	 			>
+	 				{{ $reply->favorites()->count() }}
+	 			{{ Illuminate\Support\Str::plural( 'Favorite', $reply->favorites()->count() ) }} 
 	 			</button>
-	 		</form>		
+
+	 		</form>	
+	 		  @endif	
  		</div>
 
  	</div>

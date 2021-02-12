@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThreadsController;
 use App\Http\Controllers\RepliesController;
+use App\Http\Controllers\FavoritesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,12 +31,14 @@ Route::get('threads/{channel}',[ThreadsController::class,'index']);
 
 
 //Route::get('/threads/{thread}',[ThreadsController::class,'show']);
-Route::get('/threads/{channel}/{thread}',[ThreadsController::class,'show']);
+Route::get('threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::post('threads',[ThreadsController::class,'store']);
 
 
 //Route::resource('threads',ThreadsController::class);
 Route::get('/threads/{channel}',[ThreadsController::class,'index']);
-Route::post('/threads/{channel}/{thread}/replies',[RepliesController::class,'store']);
-Route::post('replies/{reply}/favorites',[FavoritesController::class, 'store']);
+
+Route::post('threads/{channel}/{thread}/replies',[RepliesController::class,'store']);
+
+Route::post('replies/{reply}/favorites',[FavoritesController::class, 'store'])->name('favreply');
 

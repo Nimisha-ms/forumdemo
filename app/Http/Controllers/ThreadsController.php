@@ -8,6 +8,7 @@ use App\Models\Channel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Filters\ThreadFilters;
+use Illuminate\Support\Str;
 
 class ThreadsController extends Controller
 {
@@ -102,6 +103,7 @@ class ThreadsController extends Controller
      */
     public function show($channelId, Thread $thread)
     {           
+        
         return view('threads.show', [
             'thread' =>  Thread::withCount('replies')->find($thread->id),
             'replies' => $thread->replies()->paginate(5)
@@ -144,11 +146,11 @@ class ThreadsController extends Controller
 
     public function getThreads(Channel $channel, ThreadFilters  $filters){
 
-        $threads = Thread::latest()->filter($filters);
+        $threads = Thread::latest()->withCount('replies')->filter($filters);
 
         if($channel->exists)
-        {
-            $threads = $channel->threads()->latest();
+        { echo "here";exit;
+            $threads = $channel->threads()->withCount('replies')->latest();
         }
 
         return $threads->get();

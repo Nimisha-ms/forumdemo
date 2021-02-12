@@ -22,15 +22,17 @@
                 {{ $replies->links() }}
 
                 @if (auth()->check())
-                    <form method="POST" action="{{ $thread->path() . '/replies' }}">
-                        {{ csrf_field() }}
-
+                    <form method="POST" action="{{ 
+                    url('threads/' . $thread->channel->slug .'/'. $thread->id. '/replies') 
+                    }}">
+                        @csrf
+                        
                         <div class="form-group">
                             <textarea name="body" id="body" class="form-control" placeholder="Have something to say?"
                                       rows="5"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-default">Post</button>
+                        <button type="submit" class="btn btn-secondary">Post</button>
                     </form>
                 @else
                     <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this

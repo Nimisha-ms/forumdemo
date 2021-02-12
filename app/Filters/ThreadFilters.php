@@ -19,13 +19,9 @@ class ThreadFilters extends Filters
     }
     
     public function popular($popular){
-
         if($popular != ''){
         	$this->builder->getQuery()->orders = [];
-        	return $this->builder->withCount('replies')->orderBy('replies_count', 'desc');
-        }
-        else{
-            $this->builder->withCount('replies')->orderBy('replies_count', 'desc');
-        }
+        	return $this->builder->orderBy('replies_count', 'desc');
+        }        
     }
 }
