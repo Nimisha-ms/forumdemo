@@ -1,7 +1,7 @@
  <div class="panel panel-default">
  	<div class="level">
  		<h5 class="flex">
- 		<a href="#" class="">
+ 		<a href="{{ route('profile', $reply->owner) }}" class="">
  			{{ $reply->owner->name }}
  		</a> said  {{ $reply->created_at->diffforHumans() }}
  		 </h5>
@@ -17,8 +17,8 @@
 	 			<button type="submit" class="btn btn-secondary flex"
 	 			{{ $reply->isFavorited() ? 'disabled' : '' }}
 	 			>
-	 				{{ $reply->favorites()->count() }}
-	 			{{ Illuminate\Support\Str::plural( 'Favorite', $reply->favorites()->count() ) }} 
+	 				{{ $reply->favorites->count() }}
+	 			{{ Illuminate\Support\Str::plural( 'Favorite', $reply->favorites->count() ) }} 
 	 			</button>
 
 	 		</form>	

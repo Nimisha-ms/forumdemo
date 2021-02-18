@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ThreadsController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +35,7 @@ Route::get('threads/{channel}',[ThreadsController::class,'index']);
 Route::get('threads/{channel}/{thread}',[ThreadsController::class,'show']);
 Route::post('threads',[ThreadsController::class,'store']);
 
+Route::delete('threads/{channel}/{thread}', [ThreadsController::class,'destroy']);
 
 //Route::resource('threads',ThreadsController::class);
 Route::get('/threads/{channel}',[ThreadsController::class,'index']);
@@ -41,4 +43,7 @@ Route::get('/threads/{channel}',[ThreadsController::class,'index']);
 Route::post('threads/{channel}/{thread}/replies',[RepliesController::class,'store']);
 
 Route::post('replies/{reply}/favorites',[FavoritesController::class, 'store'])->name('favreply');
+
+//Profile
+Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile');
 

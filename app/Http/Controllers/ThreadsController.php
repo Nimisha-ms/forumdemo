@@ -103,7 +103,7 @@ class ThreadsController extends Controller
      */
     public function show($channelId, Thread $thread)
     {           
-        
+        //return $thread->replies;
         return view('threads.show', [
             'thread' =>  Thread::withCount('replies')->find($thread->id),
             'replies' => $thread->replies()->paginate(5)
@@ -133,26 +133,28 @@ class ThreadsController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Thread $thread)
-    {
-        //
-    }
-
     public function getThreads(Channel $channel, ThreadFilters  $filters){
 
-        $threads = Thread::latest()->withCount('replies')->filter($filters);
+        $threads = Thread::with('channel')->latest()->withCount('replies')->filter($filters);
 
         if($channel->exists)
-        { echo "here";exit;
+        {
             $threads = $channel->threads()->withCount('replies')->latest();
         }
 
         return $threads->get();
+    }
+
+    public function destroy($channel, Thread $thread){       
+
+        //if($thread->user_id != auth()->id()){
+
+        $this->authorize('update', $thread);
+            //abort(403, 'You do not have permission to delete this thread');
+        ///
+
+        $thread->replies()->delete();
+        $thread->delete();
+        return redirect('/threads');
     }
 }

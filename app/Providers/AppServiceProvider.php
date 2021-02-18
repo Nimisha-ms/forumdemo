@@ -26,6 +26,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        \View::share('channels', \App\Models\Channel::all());
+       /* \View::share('channels', \App\Models\Channel::all());*/
+       \View::composer('*', function($view){
+            $channels = \Cache::rememberForever('channels', function(){
+                return  \App\Models\Channel::all();
+            });
+            //$view->with('channels', \App\Models\Channel::all());
+            $view->with('channels', $channels);
+       });
     }
 }

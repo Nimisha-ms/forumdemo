@@ -12,15 +12,34 @@ class Thread extends Model
 
     protected $guarded = [];
 
+    protected $with = ['creator', 'channel'];
+
     protected $table = "threads";
 
+
+    public static function boot(){
+        parent::boot();
+
+        
+        static::addGlobalScope('replyCount', function ($builder) {
+            $builder->withCount('replies');
+        });
+
+        /*static::addGlobalScope('creator', function($builder) {
+            $builder->withCount('creator');
+        });*/
+    }
+
     public function path(){
-    	return '/threads/'. $this->id;
+    	//return '/threads/'. $this->id;
+        return "/threads/{$this->channel->slug}/{$this->id}";
     }
 
     public function replies()
     {
     	 return $this->hasMany(Reply::class);
+         //->withCount('favorites')
+        // ->with('owner');
     }
 
     public function creator()
