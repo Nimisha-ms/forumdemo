@@ -72,7 +72,7 @@ class ThreadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Thread $thread)
+    public function store(Channel $channel, Request $request, Thread $thread)
     {
          $validateData = $request->validate([
                 'title' => 'required',                                
@@ -92,7 +92,8 @@ class ThreadsController extends Controller
             'title' => $request->get('title'),
             'body' => $request->get('body')
         ]);
-        return redirect($thread->path());
+        return redirect($thread->path())
+            ->with('flash','Your thread has been published!');
     }
 
     /**

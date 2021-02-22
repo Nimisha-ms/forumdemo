@@ -44,6 +44,8 @@ Route::post('threads/{channel}/{thread}/replies',[RepliesController::class,'stor
 
 Route::post('replies/{reply}/favorites',[FavoritesController::class, 'store'])->name('favreply');
 
+Route::delete('replies/{reply}', [RepliesController::class,'destroy']);
+
 //Profile
 Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile');
 
