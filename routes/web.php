@@ -46,6 +46,8 @@ Route::post('replies/{reply}/favorites',[FavoritesController::class, 'store'])->
 
 Route::delete('replies/{reply}', [RepliesController::class,'destroy']);
 
+Route::patch('/replies/{reply}', [RepliesController::class,'update']);
+
 //Profile
 Route::get('profile/{user}', [ProfileController::class, 'show'])->name('profile');
 

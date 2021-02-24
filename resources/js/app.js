@@ -7,7 +7,11 @@
 require('./bootstrap');
 
 
+
+
 window.Vue = require('vue').default;
+
+//window.Event = new Vue();
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,6 +29,8 @@ window.Vue = require('vue').default;
 /*Vue.component('example-component', require('./components/ExampleComponent.vue').default);*/
 
 Vue.component('flash', require('./components/Flash.vue').default);
+
+Vue.component('reply', require('./components/Reply.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
